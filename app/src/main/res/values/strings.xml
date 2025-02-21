@@ -28,4 +28,9 @@
         \tРаздел \"Главная\" представляет собой список товаров, при нажатии на любой из них открывается страница товара.\n\n
         \tРаздел \"Профиль\" обеспечивает ролевую модель безопасности (существует два аакаунта user1 и user2 с паролем \"123\")
     </string>
+    <string name="categories">Категории</string>
+    <string name="home">Главная</string>
+    <string name="profile">Профиль</string>
+    <string name="cart">Корзина</string>
+    <string name="options">Настройки</string>
 </resources>

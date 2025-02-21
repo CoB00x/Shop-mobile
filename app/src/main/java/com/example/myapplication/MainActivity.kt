@@ -46,17 +46,14 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_change_profile -> {
                     startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
                 }
-
-                R.id.nav_about -> {
-                    startActivity(Intent(this@MainActivity, AboutActivity::class.java))
-                }
-
-                R.id.nav_author -> {
-                    startActivity(Intent(this@MainActivity, DeveloperActivity::class.java))
-                }
-
                 R.id.nav_cart -> {
                     startActivity(Intent(this@MainActivity, CartActivity::class.java))
+                }
+                R.id.nav_categories -> {
+                    startActivity(Intent(this@MainActivity, CategoriesActivity::class.java))
+                }
+                R.id.nav_options -> {
+                    startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
                 }
             }
             drawer?.closeDrawer(GravityCompat.START)

@@ -57,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_profile_name" />
+        app:srcCompat="@drawable/ic_profile" />
 
     <Button
         android:id="@+id/btn_enter"

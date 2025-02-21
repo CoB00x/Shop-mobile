@@ -46,17 +46,17 @@ class ProfileActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         navigationView?.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_about -> {
-                    startActivity(Intent(this@ProfileActivity, AboutActivity::class.java))
-                }
-                R.id.nav_author -> {
-                    startActivity(Intent(this@ProfileActivity, DeveloperActivity::class.java))
-                }
                 R.id.nav_main -> {
                     startActivity(Intent(this@ProfileActivity, MainActivity::class.java))
                 }
                 R.id.nav_cart -> {
                     startActivity(Intent(this@ProfileActivity, CartActivity::class.java))
+                }
+                R.id.nav_categories -> {
+                    startActivity(Intent(this@ProfileActivity, CategoriesActivity::class.java))
+                }
+                R.id.nav_options -> {
+                    startActivity(Intent(this@ProfileActivity, SettingsActivity::class.java))
                 }
             }
             drawer?.closeDrawer(GravityCompat.START)

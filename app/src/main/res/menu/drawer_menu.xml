@@ -5,18 +5,12 @@
     <group android:id="@+id/group_main">
         <item
             android:id="@+id/nav_change_profile"
-            android:icon="@drawable/ic_profile_name"
-            android:title="Профиль" />
+            android:icon="@drawable/ic_profile"
+            android:title="@string/profile" />
         <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/ic_info_name"
-            android:title="О приложении" />
-        <item
-            android:id="@+id/nav_author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@android:drawable/stat_sys_headset"
-            android:title="Разарботчик" />
+            android:id="@+id/nav_options"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/options" />
     </group>
 
     <!-- Вторая группа -->
@@ -24,11 +18,15 @@
         <item
             android:id="@+id/nav_main"
             android:icon="@drawable/ic_home"
-            android:title="Главная" />
+            android:title="@string/home" />
+        <item
+            android:id="@+id/nav_categories"
+            android:icon="@drawable/ic_categories"
+            android:title="@string/categories" />
         <item
             android:id="@+id/nav_cart"
-            android:icon="@drawable/ic_cart_name"
-            android:title="Корзина" />
+            android:icon="@drawable/ic_cart"
+            android:title="@string/cart" />
     </group>
 
 </menu>

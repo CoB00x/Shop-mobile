@@ -44,20 +44,18 @@ class CartActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         navigationView?.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_about -> {
-                    startActivity(Intent(this@CartActivity, AboutActivity::class.java))
-                }
-
-                R.id.nav_author -> {
-                    startActivity(Intent(this@CartActivity, DeveloperActivity::class.java))
-                }
-
                 R.id.nav_main -> {
                     startActivity(Intent(this@CartActivity, MainActivity::class.java))
                 }
 
                 R.id.nav_change_profile -> {
                     startActivity(Intent(this@CartActivity, ProfileActivity::class.java))
+                }
+                R.id.nav_categories -> {
+                    startActivity(Intent(this@CartActivity, CategoriesActivity::class.java))
+                }
+                R.id.nav_options -> {
+                    startActivity(Intent(this@CartActivity, SettingsActivity::class.java))
                 }
             }
             drawer?.closeDrawer(GravityCompat.START)
@@ -86,7 +84,7 @@ class CartActivity : AppCompatActivity() {
     private val cart: List<DVD>?
         @SuppressLint("SetTextI18n")
         get() {
-            var totalTV: TextView? = findViewById(R.id.total)
+            val totalTV: TextView? = findViewById(R.id.total)
             val fileName = "profile_file"
             val directory = filesDir
             var file = File(directory, fileName)
