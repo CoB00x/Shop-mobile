@@ -18,23 +18,34 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
     private var toggle: ActionBarDrawerToggle? = null
     private var DVDs: List<DVD>? = null
     var names: MutableList<String>? = null
+    private var searchString: String? = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (savedInstanceState!=null){
+            searchString = savedInstanceState.getString("searchString")
+        }
+
         val actionBar = supportActionBar
         actionBar?.title = "Главная"
 
-
         val navigationView: NavigationView? = findViewById(R.id.nav_view)
         val drawer: DrawerLayout? = findViewById(R.id.drawer_layout_main)
+
         ////////////////////////////////////////////NavigationBar////////////////////////////////////////////
+        
+
+
         toggle = ActionBarDrawerToggle(
             this@MainActivity, drawer, R.string.drawer_open, R.string.drawer_close
         )
@@ -52,8 +63,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_categories -> {
                     startActivity(Intent(this@MainActivity, CategoriesActivity::class.java))
                 }
-                R.id.nav_options -> {
+/*                R.id.nav_options -> {
                     startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
+                }*/
+                R.id.nav_history -> {
+                    startActivity(Intent(this@MainActivity, HistoryActivity::class.java))
                 }
             }
             drawer?.closeDrawer(GravityCompat.START)
@@ -64,9 +78,11 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         val myAdapter = RecyclerAdapter(DVDs, this@MainActivity)
         recyclerView.adapter = myAdapter
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        searchString?.let { Log.i("qwe", it) };
         val inflater = menuInflater
         inflater.inflate(R.menu.search_menu, menu)
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, names!!)
@@ -74,12 +90,18 @@ class MainActivity : AppCompatActivity() {
         listView.adapter = adapter
         val searchViewItem = menu.findItem(R.id.search_bar)
         val searchView = MenuItemCompat.getActionView(searchViewItem) as SearchView
+
+        if (searchString != ""){
+            searchView.isIconified
+            searchView.onActionViewExpanded()
+            searchView.setQuery(searchString, false)
+            searchView.isFocusable = true;
+        }
+
         listView.onItemClickListener = OnItemClickListener { parent, view, position, id ->
             val selectedName = listView.getItemAtPosition(position).toString()
             for (i in names!!.indices) {
-                Log.i("qwe", DVDs!![0].name)
                 if (DVDs!![i].name == selectedName) {
-                    Log.i("qwe", "qwe")
                     val intent = Intent(this@MainActivity, ItemActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     intent.putExtra("DVD", DVDs!![i])
@@ -88,6 +110,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
             override fun onQueryTextSubmit(query: String): Boolean {
                 if (names!!.contains(query)) {
                     adapter.filter.filter(query)
@@ -104,6 +127,7 @@ class MainActivity : AppCompatActivity() {
                     listView.visibility = View.GONE
                     rv.visibility = View.VISIBLE
                 }
+                searchString = newText;
                 return false
             }
         })
@@ -116,28 +140,16 @@ class MainActivity : AppCompatActivity() {
         } else super.onOptionsItemSelected(item)
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("searchString", searchString);
+        super.onSaveInstanceState(outState)
+    }
+
     private fun setDVDs(): List<DVD> {
         val list: MutableList<DVD> = ArrayList()
-        list.add(DVD("Аладин", R.drawable.aladin, resources.getString(R.string.aladin), 300.0))
-        list.add(
-            DVD(
-                "Ледниковый период",
-                R.drawable.iceage,
-                resources.getString(R.string.iceage),
-                350.0
-            )
-        )
-        list.add(DVD("Сезон охоты", R.drawable.season, resources.getString(R.string.season), 299.0))
-        list.add(DVD("Тачки", R.drawable.cars, resources.getString(R.string.cars), 279.0))
-        list.add(
-            DVD(
-                "Хлодное сердце",
-                R.drawable.frozen,
-                resources.getString(R.string.frozen),
-                321.0
-            )
-        )
-        list.add(DVD("Шрек", R.drawable.shrek, resources.getString(R.string.shrek), 333.0))
+        list.add(DVD("Диван Парма", R.drawable.parma, "Диван-кровать Парма выполнен в строгом минималистичном стиле. Все его поверхности имеют правильную геометрическую форму. Лаконичный и элегантный дизайн визуально не перегружает пространство, а пастельные тона обивки будут гармонично сочетаться с широкой гаммой других оттенков в интерьере. Эта модель доступна только в тех вариантах обивки, которые представлены в нашем ассортименте.", 300.0))
+        list.add(DVD("Диван Пекин",
+            R.drawable.pekin, "Диван-кровать Пекин — элегантная и практичная модель с узкими и при этом удобными подлокотниками, которая понравится обладателям небольших комнат. При ширине дивана 200 см спальное место лишь немногим уже — 192 см, поэтому одному человеку спать на нем будет комфортно и без раскладывания. Благодаря велюровой обивке и отстрочке модель выглядит стильно и эффектно.", 333.0))
         names = ArrayList()
         for (i in list.indices) {
             names!!.add(list[i].name)

@@ -23,7 +23,7 @@ import java.io.IOException
 
 class ProfileActivity : AppCompatActivity() {
     private var toggle: ActionBarDrawerToggle? = null
-    private var profile: String? = "Нет"
+    private var profile: String? = "Войдите, чтобы продолжить"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,14 +55,17 @@ class ProfileActivity : AppCompatActivity() {
                 R.id.nav_categories -> {
                     startActivity(Intent(this@ProfileActivity, CategoriesActivity::class.java))
                 }
-                R.id.nav_options -> {
+/*                R.id.nav_options -> {
                     startActivity(Intent(this@ProfileActivity, SettingsActivity::class.java))
+                }*/
+                R.id.nav_history -> {
+                    startActivity(Intent(this@ProfileActivity, HistoryActivity::class.java))
                 }
             }
             drawer?.closeDrawer(GravityCompat.START)
             true
         }
-        btn?.setOnClickListener {
+        btn.setOnClickListener {
             Log.i("qwe","qwe");
             val intent = Intent(this@ProfileActivity, LoginActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -163,9 +166,9 @@ class ProfileActivity : AppCompatActivity() {
                 img?.setImageResource(R.drawable.emptyuser)
                 btn?.text = "Войти"
                 out?.visibility = View.GONE
-                profile = "Нет"
+                profile = "Войдите, чтобы продолжить"
             }
         }
-        name.text = "Профиль: $profile"
+        name.text = "$profile"
     }
 }
