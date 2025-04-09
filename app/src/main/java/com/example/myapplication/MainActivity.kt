@@ -20,6 +20,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.switchmaterial.SwitchMaterial
 
+const val EXAMPLE_PREFERENCES = "example_preferences"
+const val EDIT_TEXT_KEY = "key_for_edit_text"
+
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
     private var toggle: ActionBarDrawerToggle? = null
@@ -32,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val sharedPrefs = getSharedPreferences(EXAMPLE_PREFERENCES, MODE_PRIVATE)
+
         if (savedInstanceState!=null){
             searchString = savedInstanceState.getString("searchString")
         }
@@ -43,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         val drawer: DrawerLayout? = findViewById(R.id.drawer_layout_main)
 
         ////////////////////////////////////////////NavigationBar////////////////////////////////////////////
-        
+
 
 
         toggle = ActionBarDrawerToggle(

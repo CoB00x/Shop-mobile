@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Главная группа -->
     <group android:id="@+id/group_main">
         <item
             android:id="@+id/nav_change_profile"
-            android:icon="@drawable/ic_profile"
+            android:icon="@drawable/profile_black"
             android:title="@string/profile" />
         <item
             android:id="@+id/nav_history"
+            android:icon="@drawable/ic_history"
+            android:title="@string/history" />
+<!--        <item
+            android:id="@+id/nav_options"
             android:icon="@drawable/ic_settings"
-            android:title="@string/options" />
+            android:title="@string/options" />-->
     </group>
 
     <!-- Вторая группа -->
     <group android:id="@+id/group_main_sections">
         <item
             android:id="@+id/nav_main"
-            android:icon="@drawable/ic_home"
+            android:icon="@drawable/main_black"
             android:title="@string/home" />
         <item
             android:id="@+id/nav_categories"
@@ -25,7 +30,7 @@
             android:title="@string/categories" />
         <item
             android:id="@+id/nav_cart"
-            android:icon="@drawable/ic_cart"
+            android:icon="@drawable/cart_black"
             android:title="@string/cart" />
     </group>
 

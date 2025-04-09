@@ -49,9 +49,6 @@ class CategoriesActivity : AppCompatActivity() {
                 R.id.nav_main -> {
                     startActivity(Intent(this@CategoriesActivity, MainActivity::class.java))
                 }
-/*                R.id.nav_options -> {
-                    startActivity(Intent(this@CategoriesActivity, SettingsActivity::class.java))
-                }*/
                 R.id.nav_history -> {
                     startActivity(Intent(this@CategoriesActivity, HistoryActivity::class.java))
                 }

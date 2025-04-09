@@ -54,9 +54,6 @@ class CartActivity : AppCompatActivity() {
                 R.id.nav_categories -> {
                     startActivity(Intent(this@CartActivity, CategoriesActivity::class.java))
                 }
-/*                R.id.nav_options -> {
-                    startActivity(Intent(this@CartActivity, SettingsActivity::class.java))
-                }*/
                 R.id.nav_history -> {
                     startActivity(Intent(this@CartActivity, HistoryActivity::class.java))
                 }

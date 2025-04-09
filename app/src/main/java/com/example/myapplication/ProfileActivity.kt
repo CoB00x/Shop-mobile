@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.switchmaterial.SwitchMaterial
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -91,6 +92,12 @@ class ProfileActivity : AppCompatActivity() {
             val alertDialog = builder.create()
             alertDialog.show()
         }
+
+        val themeSwitcher = findViewById<SwitchMaterial>(R.id.themeSwitcher)
+        themeSwitcher.setOnCheckedChangeListener { switcher, checked->
+
+        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

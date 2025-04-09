@@ -39,8 +39,11 @@ class HistoryActivity : AppCompatActivity() {
                 R.id.nav_categories -> {
                     startActivity(Intent(this@HistoryActivity, CategoriesActivity::class.java))
                 }
-                R.id.nav_history -> {
-                    startActivity(Intent(this@HistoryActivity, HistoryActivity::class.java))
+                R.id.nav_main -> {
+                    startActivity(Intent(this@HistoryActivity, MainActivity::class.java))
+                }
+                R.id.nav_categories -> {
+                    startActivity(Intent(this@HistoryActivity, CategoriesActivity::class.java))
                 }
             }
             drawer?.closeDrawer(GravityCompat.START)
