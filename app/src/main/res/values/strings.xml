@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Sport Up</string>
 
     <string name="drawer_open" />
     <string name="drawer_close" />

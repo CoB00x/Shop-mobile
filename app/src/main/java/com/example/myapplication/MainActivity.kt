@@ -18,15 +18,12 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.switchmaterial.SwitchMaterial
-
-const val EXAMPLE_PREFERENCES = "example_preferences"
-const val EDIT_TEXT_KEY = "key_for_edit_text"
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
     private var toggle: ActionBarDrawerToggle? = null
     private var DVDs: List<DVD>? = null
+    private var history: List<String>? = null
     var names: MutableList<String>? = null
     private var searchString: String? = ""
 
@@ -34,8 +31,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val sharedPrefs = getSharedPreferences(EXAMPLE_PREFERENCES, MODE_PRIVATE)
 
         if (savedInstanceState!=null){
             searchString = savedInstanceState.getString("searchString")
@@ -47,10 +42,8 @@ class MainActivity : AppCompatActivity() {
         val navigationView: NavigationView? = findViewById(R.id.nav_view)
         val drawer: DrawerLayout? = findViewById(R.id.drawer_layout_main)
 
-        ////////////////////////////////////////////NavigationBar////////////////////////////////////////////
 
-
-
+        ///NavigationBar///
         toggle = ActionBarDrawerToggle(
             this@MainActivity, drawer, R.string.drawer_open, R.string.drawer_close
         )
@@ -68,9 +61,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_categories -> {
                     startActivity(Intent(this@MainActivity, CategoriesActivity::class.java))
                 }
-/*                R.id.nav_options -> {
-                    startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
-                }*/
                 R.id.nav_history -> {
                     startActivity(Intent(this@MainActivity, HistoryActivity::class.java))
                 }
@@ -78,14 +68,17 @@ class MainActivity : AppCompatActivity() {
             drawer?.closeDrawer(GravityCompat.START)
             true
         }
+
+        ///Заполнение списка товаров///
         DVDs = setDVDs()
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_list)
         recyclerView.layoutManager = LinearLayoutManager(this)
         val myAdapter = RecyclerAdapter(DVDs, this@MainActivity)
         recyclerView.adapter = myAdapter
-
     }
 
+
+    ///OptionsMenu///
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         searchString?.let { Log.i("qwe", it) };
         val inflater = menuInflater
@@ -96,6 +89,7 @@ class MainActivity : AppCompatActivity() {
         val searchViewItem = menu.findItem(R.id.search_bar)
         val searchView = MenuItemCompat.getActionView(searchViewItem) as SearchView
 
+        ///SearchMenu///
         if (searchString != ""){
             searchView.isIconified
             searchView.onActionViewExpanded()
@@ -103,6 +97,7 @@ class MainActivity : AppCompatActivity() {
             searchView.isFocusable = true;
         }
 
+        ///SearchMenu listener///
         listView.onItemClickListener = OnItemClickListener { parent, view, position, id ->
             val selectedName = listView.getItemAtPosition(position).toString()
             for (i in names!!.indices) {
@@ -115,7 +110,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
             override fun onQueryTextSubmit(query: String): Boolean {
                 if (names!!.contains(query)) {
                     adapter.filter.filter(query)
@@ -150,6 +144,8 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
     }
 
+
+    ///Заполнение массива товаров///
     private fun setDVDs(): List<DVD> {
         val list: MutableList<DVD> = ArrayList()
         list.add(DVD("Диван Парма", R.drawable.parma, "Диван-кровать Парма выполнен в строгом минималистичном стиле. Все его поверхности имеют правильную геометрическую форму. Лаконичный и элегантный дизайн визуально не перегружает пространство, а пастельные тона обивки будут гармонично сочетаться с широкой гаммой других оттенков в интерьере. Эта модель доступна только в тех вариантах обивки, которые представлены в нашем ассортименте.", 300.0))

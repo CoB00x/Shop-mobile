@@ -1,11 +1,19 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("org.jetbrains.dokka") version "1.9.10"
 }
 
 android {
     namespace = "com.example.myapplication"
     compileSdk = 35
+
+    packagingOptions {
+        excludes += listOf(
+            "META-INF/NOTICE.md",
+            "META-INF/LICENSE.md"
+        )
+    }
 
     defaultConfig {
         applicationId = "com.example.myapplication"
@@ -35,6 +43,10 @@ android {
     }
 }
 
+tasks.dokkaHtml.configure {
+    outputDirectory.set(file("C:/Users/pprni/OneDrive/Рабочий стол/doc"))
+}
+
 dependencies {
     implementation(libs.retrofit2.retrofit)
     implementation(libs.gson)
@@ -46,4 +58,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.dokka.gradle.plugin)
 }
